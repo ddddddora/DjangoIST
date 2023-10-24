@@ -1,4 +1,6 @@
 from django.apps import AppConfig
+
+
 # для конфигурирования текущего приложения
 
 class WomenConfig(AppConfig):
