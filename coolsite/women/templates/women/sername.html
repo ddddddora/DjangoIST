@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+<h1>{{title}}</h1>
+<br>
+<ul>
+    {% for st in spisok %}
+        {% if st.kod == "м" %}
+            <li>
+                <h2>{{ st.kod }} </h2>
+                <i><p>{{ st.surname }}</p></i>
+            {% if not forloop.last %}
+            <hr>
+            {% endif %}
+            </li>
+        {% elif st.kod == "ж" %}
+            <li>
+                <h2>{{ st.kod }} </h2>
+                <b><p>{{ st.surname }}</p></b>
+            {% if not forloop.last %}
+            <hr>
+            {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+</body>
+</html>

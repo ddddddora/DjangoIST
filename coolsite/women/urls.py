@@ -7,13 +7,16 @@ register_converter(FourDigitYearConverter, "yyyy")
 
 urlpatterns = [
 
-    path('', views.index),
-    path('Students/', views.help),
-    path('Students/<int:student_id>/', views.student_index),
-    path('years/<yyyy:year_id>/', views.year),
-    path('years/', views.years_mainpage),
+    path('', views.index, name='home'),
+    path('about/', views.about, name='about'),
+    path('student/', views.student, name='surn'),
+    path('apteka_/', views.apteka_, name='apteka'),
+    path('Students/', views.help, name='students'),
+    path('Students/<int:student_id>/', views.student_index, name='students_id'),
+    path('years/<yyyy:year_id>/', views.year, name='years_id'),
+    path('years/', views.years_mainpage, name='years'),
     path('client_err_test/', views.err_400),
     path('server_err_test/', views.err_500),
-    path('alphabet/<yyyy:symbol>', views.display_char),
-    path("archive/<yyyy:year>", views.archive),
+    path('alphabet/<yyyy:symbol>', views.display_char, name='alphabet'),
+    path("archive/<yyyy:year>", views.archive, name='archive'),
 ]

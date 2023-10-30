@@ -10,8 +10,11 @@ def index(request):
             'int_numb': 543,
             'float_numb': 23.88,
             'list_numb': ['23', 'one', 45.6],
-            'slovar':{"key1":"znach_1", "key2": "znach_2"}}
+            'slovar':{"key1":"znach_1", "key2": "znach_2"},
+            'students': data_db,
+            'menu': menu}
     return render(request, 'women/index.html', context=data)
+
 
 
 def help(request):
@@ -117,3 +120,63 @@ def err_500(request):
 # имитация ошибки сервера
 def display_char(request, symbol):
     return HttpResponse(f'<h1>Буквы латинского алфавита</h1> <h2>Буква: {symbol}</h2>')
+
+data_db = [
+    {'id':1, 'FIO': 'Капшукова Дарья Руслановна', 'interesting': 'Рисование, футбол', 'is_smoke':False},
+ {'id':2, 'FIO': 'Горабалев Кирилл Артемович', 'interesting': 'Бокс, вязание', 'is_smoke':False},
+    {'id': 3, 'FIO': 'Миколадзе Антон Алексеевич', 'interesting': 'история, литрература', 'is_smoke': True},
+]
+
+treatment = [
+    {'kod': 243, 'disease': 'Грипп', 'dosage': '500 mg'},
+    {'kod': 56,'disease': 'Авитаминоз', 'dosage': '10 mg'},
+    {'kod': 23,'disease': 'Аллергические заболевания', 'dosage': '1,8 mg'},
+    {'kod': 575,'disease': 'Ринит', 'dosage': '564 mg'},
+    {'kod': 234,'disease': 'Гайморит', 'dosage': '40 mg'},
+    {'kod': 675,'disease': 'Панкреатит', 'dosage': '200 mg'},
+]
+
+Students = [{'kod': "м", 'surname': '1) Буренок Дмитрий (14.01.2005)'},
+            {'kod': "м", 'surname': '2) Горбанёв Кирилл (25.01.2006)'},
+            {'kod': "ж", 'surname': '3) Капшукова Дарья (27.06.2004)'},
+            {'kod': "ж", 'surname': '4) Кашаева Раяна (27.06.2004)'},
+            {'kod': "м", 'surname': '5) Климин Тимур (17.05.2004)'},
+            {'kod': "м", 'surname': '6) Косенков Глеб (09.06.2004)'},
+            {'kod': "м", 'surname':  '7) Костин Максим (03.04.2001)'},
+            {'kod': "м", 'surname':  '8) Кузенков Богдан (25.11.2003)'},
+            {'kod': "м", 'surname': '9) Миколадзе Антон (14.09.2004)'},
+            {'kod': "м", 'surname':  '10) Мишин Александр (21.08.2004)'},
+            {'kod': "м", 'surname':  '11) Мишин Алексей (21.08.2004)'},
+            {'kod': "м", 'surname':  '12) Пешеходько Арсений (10.11.2004)'},
+            {'kod': "ж", 'surname':  '13) Сентюрина Екатерина (08.11.2002)'},
+            ]
+
+menu = [
+    {'title': 'Главная', 'url_n': 'home'},
+    {'title': 'О приложении', 'url_n': 'about'},
+    {'title': 'Студенты', 'url_n': 'surn'},
+    {'title': 'Года', 'url_n': 'years'},
+    {'title': 'Аптека', 'url_n': 'apteka'},
+]
+
+def about(request):
+    return render(request, 'women/about.html', {'menu': menu})
+
+def student(request):
+    if (request.GET):
+        print(request.GET)
+    data = {'title': 'Главная страница',
+            'spisok': Students,
+            }
+    return render(request, 'women/sername.html', context=data)
+    return HttpResponse('главная страница women')
+
+
+def apteka_(request):
+    if (request.GET):
+        print(request.GET)
+    data = {'title': 'Главная страница',
+            'apteka': treatment,
+            }
+    return render(request, 'women/apteka.html', context=data)
+    return HttpResponse('главная страница women')
