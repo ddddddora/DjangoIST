@@ -9,9 +9,8 @@ urlpatterns = [
 
     path('', views.index, name='home'),
     path('about/', views.about, name='about'),
-    path('student/', views.student, name='surn'),
-    path('apteka_/', views.apteka_, name='apteka'),
-    path('Students/', views.help, name='students'),
+    path('student/', views.Students, name='surn'),
+    path('apteka/', views.apteka, name='apteka'),
     path('Students/<int:student_id>/', views.student_index, name='students_id'),
     path('years/<yyyy:year_id>/', views.year, name='years_id'),
     path('years/', views.years_mainpage, name='years'),

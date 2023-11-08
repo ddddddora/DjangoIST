@@ -1,32 +1,29 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
+    <title>Список студентов</title>
 </head>
 <body>
-<h1>{{title}}</h1>
-<br>
+<h1>Список студентов группы ИСТ-201</h1>
+
 <ul>
-    {% for st in spisok %}
-        {% if st.kod == "м" %}
+    {% for i in students %}
+        {% if i.gender == 'f' %}
             <li>
-                <h2>{{ st.kod }} </h2>
-                <i><p>{{ st.surname }}</p></i>
-            {% if not forloop.last %}
-            <hr>
-            {% endif %}
+                <a href="{% url student_url i.id %}">
+                    <strong>{{i.FI}}</strong>
+                </a>
             </li>
-        {% elif st.kod == "ж" %}
+        {% else %}
             <li>
-                <h2>{{ st.kod }} </h2>
-                <b><p>{{ st.surname }}</p></b>
-            {% if not forloop.last %}
-            <hr>
-            {% endif %}
+                <a href="{% url student_url i.id %}">
+                    <i>{{i.FI}}</i>
+                </a>
             </li>
         {% endif %}
     {% endfor %}
 </ul>
+
 </body>
 </html>

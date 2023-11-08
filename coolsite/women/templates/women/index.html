@@ -13,35 +13,5 @@
     {% endfor %}
 </ul>
 <h1>{{menu.0.title }}</h1>
-<br>
-<h1>{{title}}</h1>
-<p>Целочисленный тип: {{int_numb}}</p>
-<p>Вещественный тип: {{float_numb}}</p>
-<p>Список: </p>
-<ol>
-    <li>{{list_numb.0}}</li>
-    <li>{{list_numb.1}}</li>
-    <li>{{list_numb.2}}</li>
-</ol>
-<p>Словарь: </p>
-<ol>
-    <li>{{slovar.key1}}</li>
-    <li>{{slovar.key2}}</li>
-</ol>
-<h1>{{title | upper |truncatewords:1 | cut:'А' }}</h1>
-<br>
-<ul>
-    {% for st in students %}
-    <li>
-        <h2>{{ st.FIO }} </h2>
-        <p>{{ st.interesting }}</p>
-        {% if not forloop.last %}
-        <hr>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-<br>
-<hr>
 </body>
 </html>

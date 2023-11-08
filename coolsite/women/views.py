@@ -2,44 +2,58 @@ from django.core.exceptions import PermissionDenied, BadRequest
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, HttpResponseServerError, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 
+treatment = [
+    {'kod': 243, 'disease': 'Грипп', 'dosage': '500 mg'},
+    {'kod': 56,'disease': 'Авитаминоз', 'dosage': '10 mg'},
+    {'kod': 23,'disease': 'Аллергические заболевания', 'dosage': '1,8 mg'},
+    {'kod': 575,'disease': 'Ринит', 'dosage': '564 mg'},
+    {'kod': 234,'disease': 'Гайморит', 'dosage': '40 mg'},
+    {'kod': 675,'disease': 'Панкреатит', 'dosage': '200 mg'},
+]
 
+Students = [{'id' : 1, 'FI' : 'Буренок Дмитрий', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.01.2005'},
+    {'id' : 2, 'FI' : 'Горбанев Кирилл', "gender" : 'm', 'is_smoke' : False, 'birthday' : '25.01.2006'},
+    {'id' : 3, 'FI' : 'Капшукова Дарья', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004'},
+    {'id' : 4, 'FI' : 'Кашаева Раяна', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004'},
+    {'id' : 5, 'FI' : 'Климин Тимур', "gender" : 'm', 'is_smoke' : False, 'birthday' : '17.05.2004'},
+    {'id' : 6, 'FI' : 'Косенков Глеб', "gender" : 'm', 'is_smoke' : False, 'birthday' : '9.06.2004'},
+    {'id' : 7, 'FI' : 'Костин Максим', "gender" : 'm', 'is_smoke' : False, 'birthday' : '3.04.2001'},
+    {'id' : 8, 'FI' : 'Кузенков Богдан', "gender" : 'm', 'is_smoke' : True, 'birthday' : 'unknown'},
+    {'id' : 9, 'FI' : 'Миколадзе Антон', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.09.2004'},
+    {'id' : 10, 'FI': 'Мишин Александр', "gender" : 'm', 'is_smoke' : False, 'birthday' : '21.08.2004'},
+    {'id' : 11, 'FI': 'Мишин Алексей', "gender" : 'm', 'is_smoke' : False, 'birthday' : '21.08.2004'},
+    {'id' : 12, 'FI': 'Пешеходько Арсений', "gender" : 'm', 'is_smoke' : True, 'birthday' : 'unknown'},
+    {'id' : 13, 'FI' : 'Сентюрина Екатерина', "gender" : 'f', 'is_smoke' : False, 'birthday' : '8.11.2002'}]
+
+menu = [
+    {'title': 'Главная', 'url_n': 'home'},
+    {'title': 'О приложении', 'url_n': 'about'},
+    {'title': 'Студенты', 'url_n': 'surn'},
+    {'title': 'Аптека', 'url_n': 'apteka'},
+]
 def index(request):
-    if(request.GET):
-        print(request.GET)
-    data = {'title': 'Главная страница',
-            'int_numb': 543,
-            'float_numb': 23.88,
-            'list_numb': ['23', 'one', 45.6],
-            'slovar':{"key1":"znach_1", "key2": "znach_2"},
-            'students': data_db,
-            'menu': menu}
     return render(request, 'women/index.html', context=data)
+def about(request):
+    return render(request, 'women/about.html', context=data)
+def apteka(request):
+    return render(request, 'women/apteka.html', context=data)
 
+data = {'students': Students, 'menu': menu, 'student_url': 'students_id'}
 
-
-def help(request):
-    return HttpResponse("<p>Чтобы узнть информацию о студенте - введите index</p>")
-
+#data = {    'title': 'Главная страница',
+            #'spisok': Students,
+           # 'apteka': treatment,
+           # 'menu': menu,
 
 def student_index(request, student_id):
-    Students = {1: '1) Буренок Дмитрий (14.01.2005)', 2: '2) Горбанёв Кирилл (25.01.2006)',
-                3: '3) Капшукова Дарья (27.06.2004)',
-                4: '4) Кашаева Раяна (27.06.2004)', 5: '5) Климин Тимур (17.05.2004)',
-                6: '6) Косенков Глеб (09.06.2004)',
-                7: '7) Костин Максим (03.04.2001)', 8: '8) Кузенков Богдан (25.11.2003)',
-                9: '9) Миколадзе Антон (14.09.2004)',
-                10: '10) Мишин Александр (21.08.2004)', 11: '11) Мишин Алексей (21.08.2004)',
-                12: '12) Пешеходько Арсений (10.11.2004)',
-                13: '13) Сентюрина Екатерина (08.11.2002)'}
-    if student_id == 11:
-        raise PermissionDenied()
     if 1 <= student_id <= 13:
-        return HttpResponse(f"<h2>Учащийся</h2> <p>{Students[student_id]}</p>")
-    else:
-        return HttpResponse("<h1>Учащийся с данным индексом не найден!</h1>")
+        current = Students[student_id - 1]
+        return render(request, 'women/current_student.html', context=data)
 
 
-# <li></li><li></li><li></li><li></li>
+
+
+
 def year(reguest, year_id):
     events = {
         2000: '<li>В Сиднее проходят Олимпийские игры</li><li>Космическая станция «Мир» сведена с орбиты</li><li>Запуск Википедии</li><li>Обнаружена карликовая планета Квавари</li>',
@@ -70,8 +84,6 @@ def year(reguest, year_id):
         return HttpResponse(f"<h1>Основные важные события {year_id} года</h1> <ul>{events[int(year_id)]}</ul>")
     else:
         return HttpResponse(f"<h1>{year_id} год не обработан</h1>")
-
-
 def years_mainpage(request):
     if request.GET:
         converted = str()
@@ -80,12 +92,13 @@ def years_mainpage(request):
         return HttpResponse(f"<h2>Обнаружен Get-запрос</h2> <p>Содержание: {converted[:-2]}</p>")
     return HttpResponse("<h2>Главная страница years</h2> <p>Для вывода значимых событий года добавьте индекс в URL</p>")
 
+
+
 #redirect временный(302)
 def archive(request, year):
     if year > 2023:
         return redirect('/')
     return HttpResponse(f"<h1>Архив по годам</h1><p >{year}</p>")
-
 #redirect постоянный(301)
 def archive(request, year):
     if year > 2023:
@@ -93,90 +106,21 @@ def archive(request, year):
     return HttpResponse(f"<h1>Архив по годам</h1><p >{year}</p>")
 
 
+
+
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
-
-
 def Forbidden(request, exception):
     return HttpResponseForbidden('<h1>Доступ запрещён</h1>')
-
-
 def InternalServerError(request):
     return HttpResponseServerError('<h1>Ошибка сервера</h1>')
-
-
 def ErrBadRequest(request, exception):
     return HttpResponseBadRequest('<h1>Неверный запрос</h1>')
-
-
 def err_400(request):
     raise BadRequest
-
-
 def err_500(request):
     raise abcdef
-
-
 # имитация ошибки сервера
 def display_char(request, symbol):
     return HttpResponse(f'<h1>Буквы латинского алфавита</h1> <h2>Буква: {symbol}</h2>')
 
-data_db = [
-    {'id':1, 'FIO': 'Капшукова Дарья Руслановна', 'interesting': 'Рисование, футбол', 'is_smoke':False},
- {'id':2, 'FIO': 'Горабалев Кирилл Артемович', 'interesting': 'Бокс, вязание', 'is_smoke':False},
-    {'id': 3, 'FIO': 'Миколадзе Антон Алексеевич', 'interesting': 'история, литрература', 'is_smoke': True},
-]
-
-treatment = [
-    {'kod': 243, 'disease': 'Грипп', 'dosage': '500 mg'},
-    {'kod': 56,'disease': 'Авитаминоз', 'dosage': '10 mg'},
-    {'kod': 23,'disease': 'Аллергические заболевания', 'dosage': '1,8 mg'},
-    {'kod': 575,'disease': 'Ринит', 'dosage': '564 mg'},
-    {'kod': 234,'disease': 'Гайморит', 'dosage': '40 mg'},
-    {'kod': 675,'disease': 'Панкреатит', 'dosage': '200 mg'},
-]
-
-Students = [{'kod': "м", 'surname': '1) Буренок Дмитрий (14.01.2005)'},
-            {'kod': "м", 'surname': '2) Горбанёв Кирилл (25.01.2006)'},
-            {'kod': "ж", 'surname': '3) Капшукова Дарья (27.06.2004)'},
-            {'kod': "ж", 'surname': '4) Кашаева Раяна (27.06.2004)'},
-            {'kod': "м", 'surname': '5) Климин Тимур (17.05.2004)'},
-            {'kod': "м", 'surname': '6) Косенков Глеб (09.06.2004)'},
-            {'kod': "м", 'surname':  '7) Костин Максим (03.04.2001)'},
-            {'kod': "м", 'surname':  '8) Кузенков Богдан (25.11.2003)'},
-            {'kod': "м", 'surname': '9) Миколадзе Антон (14.09.2004)'},
-            {'kod': "м", 'surname':  '10) Мишин Александр (21.08.2004)'},
-            {'kod': "м", 'surname':  '11) Мишин Алексей (21.08.2004)'},
-            {'kod': "м", 'surname':  '12) Пешеходько Арсений (10.11.2004)'},
-            {'kod': "ж", 'surname':  '13) Сентюрина Екатерина (08.11.2002)'},
-            ]
-
-menu = [
-    {'title': 'Главная', 'url_n': 'home'},
-    {'title': 'О приложении', 'url_n': 'about'},
-    {'title': 'Студенты', 'url_n': 'surn'},
-    {'title': 'Года', 'url_n': 'years'},
-    {'title': 'Аптека', 'url_n': 'apteka'},
-]
-
-def about(request):
-    return render(request, 'women/about.html', {'menu': menu})
-
-def student(request):
-    if (request.GET):
-        print(request.GET)
-    data = {'title': 'Главная страница',
-            'spisok': Students,
-            }
-    return render(request, 'women/sername.html', context=data)
-    return HttpResponse('главная страница women')
-
-
-def apteka_(request):
-    if (request.GET):
-        print(request.GET)
-    data = {'title': 'Главная страница',
-            'apteka': treatment,
-            }
-    return render(request, 'women/apteka.html', context=data)
-    return HttpResponse('главная страница women')

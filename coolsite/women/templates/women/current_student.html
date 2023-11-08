@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{FI}}</title>
+</head>
+<body>
+<h1>Данные о студенте</h1>
+<h2>{{FI}}</h2>
+<strong>Дата рождения: {{birthday}}</strong>
+<br>
+<strong>
+    Пол:
+    {% if gender == 'm' %}
+        Mужской
+    {% else %}
+        Женский
+    {% endif %}
+</strong>
+<br>
+<strong>
+    Курящий:
+    {% if is_smoke %}
+        Да
+    {% else %}
+        Нет
+    {% endif %}
+</strong>
+<br>
+</body>
+</html>
