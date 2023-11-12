@@ -1,6 +1,6 @@
-from django.core.exceptions import PermissionDenied, BadRequest
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, HttpResponseServerError, HttpResponseBadRequest
-from django.shortcuts import redirect, render
+from django.core.exceptions import BadRequest
+from django.http import HttpResponseNotFound, HttpResponseForbidden, HttpResponseServerError, HttpResponseBadRequest
+from django.shortcuts import render
 
 treatment = [
     {'kod': 243, 'disease': 'Грипп', 'dosage': '500 mg'},
@@ -11,26 +11,29 @@ treatment = [
     {'kod': 675,'disease': 'Панкреатит', 'dosage': '200 mg'},
 ]
 
-Students = [{'id' : 1, 'FI' : 'Буренок Дмитрий', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.01.2005'},
-    {'id' : 2, 'FI' : 'Горбанев Кирилл', "gender" : 'm', 'is_smoke' : False, 'birthday' : '25.01.2006'},
-    {'id' : 3, 'FI' : 'Капшукова Дарья', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004'},
-    {'id' : 4, 'FI' : 'Кашаева Раяна', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004'},
-    {'id' : 5, 'FI' : 'Климин Тимур', "gender" : 'm', 'is_smoke' : False, 'birthday' : '17.05.2004'},
-    {'id' : 6, 'FI' : 'Косенков Глеб', "gender" : 'm', 'is_smoke' : False, 'birthday' : '9.06.2004'},
-    {'id' : 7, 'FI' : 'Костин Максим', "gender" : 'm', 'is_smoke' : False, 'birthday' : '3.04.2001'},
-    {'id' : 8, 'FI' : 'Кузенков Богдан', "gender" : 'm', 'is_smoke' : True, 'birthday' : 'unknown'},
-    {'id' : 9, 'FI' : 'Миколадзе Антон', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.09.2004'},
-    {'id' : 10, 'FI': 'Мишин Александр', "gender" : 'm', 'is_smoke' : False, 'birthday' : '21.08.2004'},
-    {'id' : 11, 'FI': 'Мишин Алексей', "gender" : 'm', 'is_smoke' : False, 'birthday' : '21.08.2004'},
-    {'id' : 12, 'FI': 'Пешеходько Арсений', "gender" : 'm', 'is_smoke' : True, 'birthday' : 'unknown'},
-    {'id' : 13, 'FI' : 'Сентюрина Екатерина', "gender" : 'f', 'is_smoke' : False, 'birthday' : '8.11.2002'}]
+Students = [
+    {'id' : 1, 'FI' : 'Буренок Дмитрий', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.01.2005','image_': 'dima.jpg'},
+    {'id' : 2, 'FI' : 'Горбанев Кирилл', "gender" : 'm', 'is_smoke' : False, 'birthday' : '25.01.2006','image_': 'kirill.png'},
+    {'id' : 3, 'FI' : 'Капшукова Дарья', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004','image_': 'i.jpg'},
+    {'id' : 4, 'FI' : 'Кашаева Раяна', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004','image_': 'rayana.jpg'},
+    {'id' : 5, 'FI' : 'Климин Тимур', "gender" : 'm', 'is_smoke' : False, 'birthday' : '17.05.2004','image_': 'tim.jpg'},
+    {'id' : 6, 'FI' : 'Косенков Глеб', "gender" : 'm', 'is_smoke' : False, 'birthday' : '9.06.2004','image_': 'gleb.jpg'},
+    {'id' : 7, 'FI' : 'Костин Максим', "gender" : 'm', 'is_smoke' : False, 'birthday' : '3.04.2001','image_': 'maxim.jpg'},
+    {'id' : 8, 'FI' : 'Кузенков Богдан', "gender" : 'm', 'is_smoke' : True, 'birthday' : '','image_': 'bogdan.jpg'},
+    {'id' : 9, 'FI' : 'Миколадзе Антон', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.09.2004','image_': 'anton.jpg'},
+    {'id' : 10, 'FI': 'Мишин Александр', "gender" : 'm', 'is_smoke' : False, 'birthday' : '21.08.2004','image_': 'sasha.jpg'},
+    {'id' : 11, 'FI': 'Мишин Алексей', "gender" : 'm', 'is_smoke' : False, 'birthday' : '21.08.2004','image_': 'lesha.jpg'},
+    {'id' : 12, 'FI': 'Пешеходько Арсений', "gender" : 'm', 'is_smoke' : True, 'birthday' : '10.11.2004','image_': 'senya.jpg'},
+    {'id' : 13, 'FI' : 'Сентюрина Екатерина', "gender" : 'f', 'is_smoke' : False, 'birthday' : '8.11.2002','image_': 'kate.jpg'}]
 
 menu = [
-    {'title': 'Главная', 'url_n': 'home'},
+    {'title': 'Главная страница', 'url_n': 'home'},
     {'title': 'О приложении', 'url_n': 'about'},
     {'title': 'Студенты', 'url_n': 'surn'},
     {'title': 'Аптека', 'url_n': 'apteka'},
 ]
+
+data = {'students': Students, 'menu': menu, 'student_url': 'students_id',}
 def index(request):
     return render(request, 'women/index.html', context=data)
 def about(request):
@@ -38,74 +41,14 @@ def about(request):
 def apteka(request):
     return render(request, 'women/apteka.html', context=data)
 
-data = {'students': Students, 'menu': menu, 'student_url': 'students_id'}
-
-#data = {    'title': 'Главная страница',
-            #'spisok': Students,
-           # 'apteka': treatment,
-           # 'menu': menu,
 
 def student_index(request, student_id):
     if 1 <= student_id <= 13:
         current = Students[student_id - 1]
-        return render(request, 'women/current_student.html', context=data)
+        return render(request, 'women/current_student.html', context=current)
 
-
-
-
-
-def year(reguest, year_id):
-    events = {
-        2000: '<li>В Сиднее проходят Олимпийские игры</li><li>Космическая станция «Мир» сведена с орбиты</li><li>Запуск Википедии</li><li>Обнаружена карликовая планета Квавари</li>',
-        2001: '<li>Начало боевых действий в Афганистане</li><li>Запуск первого российского линкора Петр Великий</li><li>Введён полномасштабный визовый режим между Россией и Грузией[</li>',
-        2002: '<li>В России вступил в силу закон «О государственном пенсионном обеспечении в Российской Федерации»</li><li>В России состоялись выборы глав Республики Адыгея и Кабардино-Балкарской республики.</li><li> Гражданская война в Колумбии</li>',
-        2003: '<li>Референдум в Чечне</li><li>Новый этап экономических реформ</li><li>Реформирование силовых структур</li><li>Выход КНДР из Договора о Нераспространении ядерного оружия/</li>',
-        2004: '<li>Начала работу социальная сеть Facebook</li><li>Главой Российской Федерации повторно избран Владимир Путин</li><li>Президент РФ подписал Закон о льготных выплатах</li><li>Террористический акт в средней школе №1 в городе Беслане</li>',
-        2005: '<li> Джордж Буш (младший) вступил в должность президента США на второй срок</li><li>Вступил в силу Киотский протокол, без поддержки США и Австралии.</li><li>Количество статей в русской Википедии достигло 13 тысяч.</li><li>Создан сервис YouTube</li>',
-        2006: '<li>Создание социальной сети ВКонтакте</li><li>Начала работу социальная сеть «Одноклассники»</li><li>В России утверждено Почётное звание «Город воинской славы»</li><li>Открылись XX зимние Олимпийские игры в Турине (Италия)</li>',
-        2007: '<li>Компания Apple представила первое поколение смартфона iPhone</li><li>Microsoft начала официальные продажи Windows Vista в России</li><li>Рамзан Кадыров стал главой Чеченской Республики</li><li>Российские батискафы "Мир" впервые в истории опустились на дно океана в точке северного полюса.</li>',
-        2008: '<li>Открытие чемпионата Европы по футболу — Евро-2008 в Австрии и Швейцарии</li><li>10 сентября запущен Большой адронный коллайдер. Вопреки прогнозам пессимистов планета уцелела.</li><li>Образован новый субъект РФ - Иркутская область</li>',
-        2009: '<li>Американское космическое агентство NАSА запустило в космос мощный телескоп «Kepler»</li><li>ЮНЕСКО запустило Всемирную цифровую библиотеку</li><li>В России вступил в силу закон, по которому казино и другие игорные заведения могут легально существовать только в специально созданных игровых зонах</li><li>Начались розничные продажи новой операционной системы Windows 7</li>',
-        2010: '<li>Начало работы первого кириллического домена</li><li>Начало продаж iPad</li><li>Официальное окончание войны в Ираке</li><li>Вступил в силу Таможенный союз России, Белоруссии и Казахстана</li>',
-        2011: '<li>Милицию переименовали в полицию</li><li>Отмена перехода на зимнее время</li><li>Ким Чен Ын официально объявлен вождем КНДР</li><li>На планете стало 7 миллиардов человек</li>',
-        2012: '<li>Путин снова стал президентом РФ</li><li>Президентские выборы в Финляндии</li><li>Открытие моста на остров Русский</li><li>Население Красноярска превысило 1 миллион человек</li>',
-        2013: '<li>Начало действия антитабачного закона</li><li>Запущен официальный онлайн-магазин Apple в России</li><li>Эдвард Сноуден — разоблачитель года</li><li>В начале 2013 года на жителей Челябинска обрушился метеорит</li>',
-        2014: '<li>Воссоединение Крыма С Россией</li><li>Провозглашение Донецкой и Луганской народных республик</li><li>Олимпиада в Сочи</li><li>Россия перешла на постоянное зимнее время</li>',
-        2015: '<li>Семидесятилетие Победы в Великой Отечественной войне</li><li>Выпуск первых карт «Мир»</li><li>Вступил в силу договор о создании ЕАЭС</li><li>Заключены Минские соглашения</li>',
-        2016: '<li>С космодрома «Восточный» успешно запустили первую ракету</li><li>Закон об ограничении деятельности коллекторов</li><li>Образование Росгвардии</li><li>Дональд Трамп избран президентом США</li>',
-        2017: '<li>Кубок конфедераций в России</li><li>Закон о признании СМИ иноагентами</li><li>Путин приказал выводить российские войска из Сирии</li><li>Первый в мире электрический грузовик</li>',
-        2018: '<li>Открытие Крымского моста</li><li>Пожар в «Зимней вишне»</li><li>Повышение пенсионного возраста</li><li>Новая ядерная доктрина США</li>',
-        2019: '<li>Закон о «суверенном интернете»</li><li>США снова вышли из ЮНЕСКО и впервые — из Договора о ликвидации ракет средней и меньшей дальности</li><li>Пожар в соборе Парижской Богоматери</li><li>Отставка Нурсултана Назарбаева</li>',
-        2020: '<li>Коронавирус в России</li><li>Роскомнадзор разблокировал Telegram </li><li>Русский газ пошел в Турцию</li><li>Президент Белоруссии Александр Лукашенко был переизбран на шестой срок с неоднозначным процентным превосходством. </li>',
-        2021: '<li>Вступил в силу закон о цифровых финансовых активах</li><li>«Магнит» купил сеть «Дикси»</li><li>Цена на газ в Европе впервые в истории превысила $1000 </li><li>Смена бренда и акционеров VK</li>',
-        2022: '<li>XXIV зимние Олимпийские игры в Китае</li><li>Начало спецоперации на Украине </li><li>Илон Маск купил Twitter</li><li>Население Земли 15 ноября официально достигло восьми миллиардов человек</li>',
-        2023: '<li>Укрепление влияния Китая в мире</li><li>Избрание нового генерального секретаря ООН</li><li>Реформа системы образования в России</li><li>Взятие Артёмовска российскими войсками</li>'}
-    if 2000 <= int(year_id) <= 2023:
-        return HttpResponse(f"<h1>Основные важные события {year_id} года</h1> <ul>{events[int(year_id)]}</ul>")
-    else:
-        return HttpResponse(f"<h1>{year_id} год не обработан</h1>")
-def years_mainpage(request):
-    if request.GET:
-        converted = str()
-        for key in request.GET:
-            converted += key + ": " + request.GET[key] + ", "
-        return HttpResponse(f"<h2>Обнаружен Get-запрос</h2> <p>Содержание: {converted[:-2]}</p>")
-    return HttpResponse("<h2>Главная страница years</h2> <p>Для вывода значимых событий года добавьте индекс в URL</p>")
-
-
-
-#redirect временный(302)
-def archive(request, year):
-    if year > 2023:
-        return redirect('/')
-    return HttpResponse(f"<h1>Архив по годам</h1><p >{year}</p>")
-#redirect постоянный(301)
-def archive(request, year):
-    if year > 2023:
-        return redirect('/', permanent=True)
-    return HttpResponse(f"<h1>Архив по годам</h1><p >{year}</p>")
-
-
+def Students_mainpage(request):
+    return render(request, 'women/sername.html', context=data)
 
 
 def pageNotFound(request, exception):
@@ -119,8 +62,5 @@ def ErrBadRequest(request, exception):
 def err_400(request):
     raise BadRequest
 def err_500(request):
-    raise abcdef
+    raise ffff
 # имитация ошибки сервера
-def display_char(request, symbol):
-    return HttpResponse(f'<h1>Буквы латинского алфавита</h1> <h2>Буква: {symbol}</h2>')
-

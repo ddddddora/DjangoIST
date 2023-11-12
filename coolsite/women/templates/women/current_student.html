@@ -1,31 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{FI}}</title>
+    <link type="text/css" href="{% static 'women/css/stylesheet.css' %}" rel="stylesheet">
 </head>
 <body>
+
+<div class="students-spisok">
 <h1>Данные о студенте</h1>
 <h2>{{FI}}</h2>
-<strong>Дата рождения: {{birthday}}</strong>
+<img src="{% static 'women/image/' %}{{image_}}">
 <br>
-<strong>
+<i>Дата рождения: {{birthday}}</i>
+<br>
+<i>
     Пол:
     {% if gender == 'm' %}
         Mужской
     {% else %}
         Женский
     {% endif %}
-</strong>
+</i>
 <br>
-<strong>
+<i>
     Курящий:
     {% if is_smoke %}
         Да
     {% else %}
         Нет
     {% endif %}
-</strong>
+</i>
+</div>
 <br>
 </body>
 </html>
+

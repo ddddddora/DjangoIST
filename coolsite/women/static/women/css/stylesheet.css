@@ -1,0 +1,14 @@
+.students-spisok{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 15px;
+    max-width: 600px;
+}
+
+.students-spisok img{
+    width: 215px;
+    height: 220px;
+    border-radius: 5px;
+}
+

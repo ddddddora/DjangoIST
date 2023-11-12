@@ -1,29 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Список студентов</title>
+    <link type="text/css" href="{% static 'women/css/style_gl.css' %}" rel="stylesheet">
 </head>
 <body>
-<h1>Список студентов группы ИСТ-201</h1>
-
-<ul>
-    {% for i in students %}
-        {% if i.gender == 'f' %}
-            <li>
-                <a href="{% url student_url i.id %}">
-                    <strong>{{i.FI}}</strong>
-                </a>
-            </li>
-        {% else %}
-            <li>
-                <a href="{% url student_url i.id %}">
-                    <i>{{i.FI}}</i>
-                </a>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+    <h1>Студенты группы ИСТ-201</h1>
+        <ul>
+            {% for i in students %}
+                {% if i.gender == 'f' %}
+                    <li>
+                        <a href="{% url student_url i.id %}" class="url">
+                            <b>{{i.FI}}</b>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url student_url i.id %}" class="url">
+                            <i>{{i.FI}}</i>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <br>
 
 </body>
 </html>
