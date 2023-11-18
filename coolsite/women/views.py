@@ -14,7 +14,7 @@ treatment = [
 Students = [
     {'id' : 1, 'FI' : 'Буренок Дмитрий', "gender" : 'm', 'is_smoke' : True, 'birthday' : '14.01.2005','image_': 'dima.jpg'},
     {'id' : 2, 'FI' : 'Горбанев Кирилл', "gender" : 'm', 'is_smoke' : False, 'birthday' : '25.01.2006','image_': 'kirill.png'},
-    {'id' : 3, 'FI' : 'Капшукова Дарья', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004','image_': 'i.jpg'},
+    {'id' : 3, 'FI' : 'Капшукова Дарья', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004','image_': 'i am.jpg'},
     {'id' : 4, 'FI' : 'Кашаева Раяна', "gender" : 'f', 'is_smoke' : False, 'birthday' : '27.06.2004','image_': 'rayana.jpg'},
     {'id' : 5, 'FI' : 'Климин Тимур', "gender" : 'm', 'is_smoke' : False, 'birthday' : '17.05.2004','image_': 'tim.jpg'},
     {'id' : 6, 'FI' : 'Косенков Глеб', "gender" : 'm', 'is_smoke' : False, 'birthday' : '9.06.2004','image_': 'gleb.jpg'},
