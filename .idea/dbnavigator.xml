@@ -20,13 +20,10 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="06d8033b-349b-4c59-973f-08b1b6f6f421" object-ref="schemas/main/tables/women_student" />
-      <object connection-id="06d8033b-349b-4c59-973f-08b1b6f6f421" object-ref="schemas/main/tables/women_book" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="06d8033b-349b-4c59-973f-08b1b6f6f421" dataset="main.women_student" active-filter-id="" />
+    <filter-actions connection-id="06d8033b-349b-4c59-973f-08b1b6f6f421" dataset="main.women_student" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="06d8033b-349b-4c59-973f-08b1b6f6f421" dataset="main.women_book" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">

@@ -36,3 +36,10 @@ class Book(models.Model):
     price = models.IntegerField()
     publication = models.CharField(max_length=30)
     author = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=255, db_index=True, unique=True, verbose_name="URL")
+
+    def __str__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
